@@ -23,8 +23,9 @@
             return "WIN";
         else if (playerSelection == "rock" && computerSelection == "paper")
             return "LOSE";
-        else 
+        else if (playerSelection == computerSelection)
             return "TIE";
+        else return "LOSE";
     }
 
     function playRound(playerSelection, computerSelection) {
@@ -55,10 +56,14 @@
             let computerSelection = computerPlay();
             let playerSelection = playerPlay();
 
+            let resultSingleGame = round(playerSelection, computerSelection);
+
+            computerSelection = addEmoji(computerSelection);
+            playerSelection = addEmoji(playerSelection);
+
             console.log(`You: ${playerSelection}`);
             console.log(`Computer: ${computerSelection}`);
 
-            let resultSingleGame = round(playerSelection, computerSelection);
             if (resultSingleGame == "WIN") {
                 playerScore++;
                 console.log(`You win! ${playerSelection} beats ${computerSelection}!`)
@@ -82,6 +87,17 @@
         else
             console.log(`You tie`);
     }
+
+    function addEmoji(str) {
+        if (str == "rock")
+            str = str + " 🗻";
+        else if (str == "paper")
+            str = str + " 📃";
+        else if (str == "scissors")
+            str = str + " ✂️";
+        return str;
+    }
+
     game();
 
 </script>
