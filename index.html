@@ -1,0 +1,87 @@
+<script>
+    function computerPlay() {
+        number = Math.floor(Math.random() * 3);
+        if (number == 0)
+            return "rock";
+        else if (number == 1)
+            return "paper";
+        else
+            return "scissors";
+    }
+
+    function round(playerSelection, computerSelection) {
+        playerSelection = playerSelection.toLowerCase();
+        if (playerSelection == "rock" && computerSelection == "scissors")
+            return "WIN";
+        else if (playerSelection == "scissors" && computerSelection == "rock")
+            return "LOSE";
+        else if (playerSelection == "scissors" && computerSelection == "paper")
+            return "WIN";
+        else if (playerSelection == "paper" && computerSelection =="scissors")
+            return "LOSE";
+        else if (playerSelection == "paper" && computerSelection == "rock")
+            return "WIN";
+        else if (playerSelection == "rock" && computerSelection == "paper")
+            return "LOSE";
+        else 
+            return "TIE";
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        let resultSingleGame = round(playerSelection, computerSelection);
+        if (resultSingleGame == "WIN")
+            return `You win! ${playerSelection} beats ${computerSelection}!`;
+        else if (resultSingleGame == "LOSE")
+            return `You lose! ${playerSelection} is beaten by ${computerSelection}!`;
+        else
+            return `You guys tie`;
+    }
+
+    let comSel = computerPlay();
+    console.log(playRound("rock", comSel));
+
+    function playerPlay() {
+        let playerSelection = prompt("Rock, Paper or Scissors?");
+        return playerSelection;
+    }
+
+    function game() {
+        let computerScore = 0;
+        let playerScore = 0;
+
+        for (let i = 0; i <5; i++) {
+            console.log(`Round ${i+1}: `);
+
+            let computerSelection = computerPlay();
+            let playerSelection = playerPlay();
+
+            console.log(`You: ${playerSelection}`);
+            console.log(`Computer: ${computerSelection}`);
+
+            let resultSingleGame = round(playerSelection, computerSelection);
+            if (resultSingleGame == "WIN") {
+                playerScore++;
+                console.log(`You win! ${playerSelection} beats ${computerSelection}!`)
+                console.log(`You scored: ${playerScore}`);
+            }
+            else if (resultSingleGame == "LOSE") {
+                computerScore++;
+                console.log(`You lose! ${playerSelection} is beaten by ${computerSelection}!`);
+                console.log(`Computer scored: ${computerScore}`);
+            }
+            else
+            console.log('You tie');
+        }
+        console.log('OVERALL:');
+        console.log(`You scored: ${playerScore}`);
+        console.log(`Computer scored: ${computerScore}`);
+        if (playerScore > computerScore)
+            console.log(`You win`);
+        else if (playerScore < computerScore)
+            console.log(`You lose`);
+        else
+            console.log(`You tie`);
+    }
+    game();
+
+</script>
